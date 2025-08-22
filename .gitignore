@@ -1,44 +1,91 @@
-# Prerequisites
-*.d
+# 1. Build and Compilation Artifacts (빌드 및 컴파일 결과물)
 
-# Compiled Object files
-*.slo
-*.lo
+# Object files (오브젝트 파일)
 *.o
 *.obj
+*.lo
+*.slo
 
-# Precompiled Headers
+# Precompiled headers (사전 컴파일된 헤더)
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
+# Executables (실행 파일)
 *.exe
 *.out
 *.app
 
-# debug information files
-*.dwo
+# Libraries (라이브러리)
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
 
-# 추가
+# Debug and linker files (디버그 및 링커 파일)
+*.ilk
+*.pdb
+*.dwo
+*.d
+*.mod
+*.smod
+
+# Common build directories (일반적인 빌드 폴더)
+bin/
+obj/
+Build/
+**/bin/
+**/obj/
+**/Build/
+**/Debug/
+**/Release/
+**/x64/
+
+---
+
+# 2. IDE and Editor Files (IDE 및 편집기 관련 파일)
+
+# Visual Studio
+.vs/
 *.vs/
+*.suo
+*.user
+*.vssscc
+*.sln
+*.vcxproj
+
+# NetBeans
+nbproject/private/
+
+# Other editors
+.idea/
+.vscode/
+
+---
+
+# 3. OS and Environment Files (운영체제 및 환경 파일)
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# 기타
+*.log
+*.tmp
+*.temp
+
+---
+
+# 4. Sensitive and Configuration Files (민감 정보 및 설정 파일)
+
+# Configuration files (설정 파일)
+*.config
+*.ps1
+
+# Private keys and certificates (개인 키 및 인증서)
+*.key
+*.pem
+*.crt
