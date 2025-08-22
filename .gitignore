@@ -1,21 +1,25 @@
 # 1. Build and Compilation Artifacts (빌드 및 컴파일 결과물)
 
-# Object files (오브젝트 파일)
+# Object files
+# 컴파일러가 생성하는 중간 파일들
 *.o
 *.obj
 *.lo
 *.slo
+*.d
 
 # Precompiled headers (사전 컴파일된 헤더)
 *.gch
 *.pch
 
 # Executables (실행 파일)
+# 컴파일 후 생성되는 실행 파일
 *.exe
 *.out
 *.app
 
 # Libraries (라이브러리)
+# 컴파일 후 생성되는 동적/정적 라이브러리
 *.dll
 *.so
 *.dylib
@@ -26,11 +30,11 @@
 *.ilk
 *.pdb
 *.dwo
-*.d
 *.mod
 *.smod
 
 # Common build directories (일반적인 빌드 폴더)
+# 빌드 결과물이 저장되는 폴더
 bin/
 obj/
 Build/
@@ -46,33 +50,39 @@ Build/
 # 2. IDE and Editor Files (IDE 및 편집기 관련 파일)
 
 # Visual Studio
+# Visual Studio가 프로젝트를 관리하기 위해 생성하는 파일과 폴더
 .vs/
 *.vs/
 *.suo
 *.user
 *.vssscc
-*.sln
-*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
 
-# NetBeans
-nbproject/private/
-
-# Other editors
+# CLion / JetBrains IDEs
 .idea/
+
+# Visual Studio Code
 .vscode/
+
+# Eclipse
+.project
+.cproject
 
 ---
 
 # 3. OS and Environment Files (운영체제 및 환경 파일)
 
 # macOS
+# macOS가 생성하는 숨김 파일
 .DS_Store
 
 # Windows
+# Windows가 생성하는 숨김 파일
 Thumbs.db
 desktop.ini
 
-# 기타
+# Common temporary files (공통 임시 파일)
 *.log
 *.tmp
 *.temp
@@ -81,11 +91,10 @@ desktop.ini
 
 # 4. Sensitive and Configuration Files (민감 정보 및 설정 파일)
 
-# Configuration files (설정 파일)
-*.config
-*.ps1
-
 # Private keys and certificates (개인 키 및 인증서)
+# 보안상 절대로 공유해서는 안 되는 파일
 *.key
 *.pem
 *.crt
+
+# 연습을 위한 gitignore 설정
