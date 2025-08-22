@@ -39,6 +39,3 @@
 
 # debug information files
 *.dwo
-
-# 추가
-*.vs/
