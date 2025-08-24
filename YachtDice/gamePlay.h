@@ -13,7 +13,7 @@
 
 using namespace std;
 
-// ¸ÞÀÎ °ÔÀÓ ½ÇÇà ÇÔ¼ö
+// Â¸ÃžÃ€ÃŽ Â°Ã”Ã€Ã“ Â½Ã‡Ã‡Ã  Ã‡Ã”Â¼Ã¶
 void run_yahtzee_game();
 
 #endif // GAMEPLAY_H
