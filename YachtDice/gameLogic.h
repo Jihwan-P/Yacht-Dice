@@ -12,7 +12,7 @@
 
 using namespace std;
 
-// =================== »ó¼ö, ¿­°ÅÇü, Àü¿ª º¯¼ö ===================
+// =================== ìƒìˆ˜, ì—´ê±°í˜•, ì „ì—­ ë³€ìˆ˜ ===================
 
 constexpr int FULL_HOUSE_SCORE = 25;
 constexpr int SMALL_STRAIGHT_SCORE = 30;
@@ -36,7 +36,7 @@ using Dice = array<int, 5>;
 extern mt19937 g_rng;
 extern uniform_int_distribution<int> g_diceDist;
 
-// =================== ±¸Á¶Ã¼ Á¤ÀÇ ===================
+// =================== êµ¬ì¡°ì²´ ì •ì˜ ===================
 
 struct Scorecard {
     string name;
@@ -44,16 +44,16 @@ struct Scorecard {
     array<bool, static_cast<size_t>(Category::CATEGORY_COUNT)> used{};
     int yahtzeeBonusCount = 0;
 
-    Scorecard(string n = u8"ÇÃ·¹ÀÌ¾î");
+    Scorecard(string n = u8"í”Œë ˆì´ì–´");
     int upperSum() const;
     int lowerSum() const;
     int upperBonus() const;
     int total() const;
 };
 
-// =================== ÇÔ¼ö ¼±¾ğ ===================
+// =================== í•¨ìˆ˜ ì„ ì–¸ ===================
 
-// °ÔÀÓ ·ÎÁ÷ ¹× ÇïÆÛ ÇÔ¼ö
+// ê²Œì„ ë¡œì§ ë° í—¬í¼ í•¨ìˆ˜
 int sumDice(const Dice& d);
 array<int, 7> countFace(const Dice& d);
 bool isYahtzee(const Dice& d);
