@@ -1,13 +1,13 @@
 #include "gameUI.h"
 
-// =================== Àü¿ª º¯¼ö Á¤ÀÇ ===================
+// =================== ì „ì—­ ë³€ìˆ˜ ì •ì˜ ===================
 const int LEFT_W = 36;
 const int LEFT_X = 0;
 const int LEFT_Y = 0;
 const int RIGHT_X = LEFT_W + 1;
 const int RIGHT_Y = 0;
 
-// =================== ÄÜ¼Ö ¹× Àú¼öÁØ ·»´õ¸µ ÇÔ¼ö ===================
+// =================== ì½˜ì†” ë° ì €ìˆ˜ì¤€ ë Œë”ë§ í•¨ìˆ˜ ===================
 #ifdef _WIN32
 HANDLE HOUT;
 wstring s2ws(const std::string& s) {
@@ -60,7 +60,7 @@ int getConsoleCols() { return 120; }
 int getConsoleRows() { return 60; }
 #endif
 
-// À¯Æ¿: ¼¼·Î ±¸ºĞ¼±/°¡·ÎÁÙ/¿À¸¥ÂÊ Áö¿ì±â
+// ìœ í‹¸: ì„¸ë¡œ êµ¬ë¶„ì„ /ê°€ë¡œì¤„/ì˜¤ë¥¸ìª½ ì§€ìš°ê¸°
 void drawVerticalSep(int col, int y_top, int y_bottom, const string& glyph) {
     for (int y = y_top; y <= y_bottom; ++y) writeAt(col, y, glyph);
 }
@@ -158,9 +158,9 @@ void displayImpactEffect(const string& combinationName) {
 void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const array<bool, 5>& held, const vector<Scorecard>& players, const string& promptMsg, const string& errorMsg, const string& statusMsg) {
     clearScreen();
 
-    // ¿ŞÂÊ ÆĞ³Î Á¦¸ñ
-    writeAt(LEFT_X, LEFT_Y, u8"      == ¾ßÃß Á¡¼öÆÇ ==");
-    // µ¿Àû ±¸ºĞ¼±
+    // ì™¼ìª½ íŒ¨ë„ ì œëª©
+    writeAt(LEFT_X, LEFT_Y, u8"      == ì•¼ì¶” ì ìˆ˜íŒ ==");
+    // ë™ì  êµ¬ë¶„ì„ 
     drawVerticalSep(LEFT_W, 1, getConsoleRows() - 1);
 
     const Scorecard& sc = players[p_idx];
@@ -174,13 +174,13 @@ void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const arra
         int padding = ALIGN_COL - getVisualWidth(prefix_str);
         if (padding < 1) padding = 1;
         ostringstream final_line;
-        final_line << prefix_str << string(padding, ' ') << ": " << (sc.used[i] ? to_string(sc.scores[i]) : u8"(¹Ì»ç¿ë)");
+        final_line << prefix_str << string(padding, ' ') << ": " << (sc.used[i] ? to_string(sc.scores[i]) : u8"(ë¯¸ì‚¬ìš©)");
         writeAt(LEFT_X, y++, final_line.str());
     }
     y++;
-    string subTotalStr = u8" ¼­ºê ÅäÅ»";
+    string subTotalStr = u8" ì„œë¸Œ í† íƒˆ";
     writeAt(LEFT_X, y++, subTotalStr + string(ALIGN_COL - getVisualWidth(subTotalStr), ' ') + ": " + to_string(sc.upperSum()) + " / " + to_string(UPPER_BONUS_THRESHOLD));
-    string bonusStr = u8" +35 º¸³Ê½º";
+    string bonusStr = u8" +35 ë³´ë„ˆìŠ¤";
     writeAt(LEFT_X, y++, bonusStr + string(ALIGN_COL - getVisualWidth(bonusStr), ' ') + ": " + to_string(sc.upperBonus()));
     y++;
 
@@ -191,32 +191,32 @@ void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const arra
         int padding = ALIGN_COL - getVisualWidth(prefix_str);
         if (padding < 1) padding = 1;
         ostringstream final_line;
-        final_line << prefix_str << string(padding, ' ') << ": " << (sc.used[i] ? to_string(sc.scores[i]) : u8"(¹Ì»ç¿ë)");
+        final_line << prefix_str << string(padding, ' ') << ": " << (sc.used[i] ? to_string(sc.scores[i]) : u8"(ë¯¸ì‚¬ìš©)");
         writeAt(LEFT_X, y++, final_line.str());
     }
     y++;
-    string yahtzeeBonusStr = u8" ¾ßÃß º¸³Ê½º x " + to_string(sc.yahtzeeBonusCount);
+    string yahtzeeBonusStr = u8" ì•¼ì¶” ë³´ë„ˆìŠ¤ x " + to_string(sc.yahtzeeBonusCount);
     writeAt(LEFT_X, y++, yahtzeeBonusStr + string(ALIGN_COL - getVisualWidth(yahtzeeBonusStr), ' ') + ": " + to_string(sc.yahtzeeBonusCount * YAHTZEE_BONUS_SCORE));
     y++;
-    writeAt(LEFT_X, y++, u8" ÃÑÁ¡: " + to_string(sc.total()));
+    writeAt(LEFT_X, y++, u8" ì´ì : " + to_string(sc.total()));
     y += 2;
-    writeAt(LEFT_X, y++, u8"--- ÇÃ·¹ÀÌ¾î Á¡¼ö ÃÑÇÕ ---");
+    writeAt(LEFT_X, y++, u8"--- í”Œë ˆì´ì–´ ì ìˆ˜ ì´í•© ---");
     for (size_t i = 0; i < players.size(); ++i) {
         const auto& pl = players[i];
         ostringstream line; line << (pl.name == sc.name ? " > " : "   ") << fitName(pl.name, 10) << " : " << pl.total();
         writeAt(LEFT_X, y++, line.str());
     }
 
-    // ¿À¸¥ÂÊ ÆĞ³Î
-    ostringstream hdr; hdr << u8"--- ¶ó¿îµå " << round << u8" / 13 --- (" << sc.name << u8" ´Ô)";
+    // ì˜¤ë¥¸ìª½ íŒ¨ë„
+    ostringstream hdr; hdr << u8"--- ë¼ìš´ë“œ " << round << u8" / 13 --- (" << sc.name << u8" ë‹˜)";
     writeAt(RIGHT_X, RIGHT_Y, hdr.str());
-    ostringstream rollsStr; rollsStr << u8"³²Àº ±¼¸®±â: " << rollsLeft; writeAt(RIGHT_X, RIGHT_Y + 1, rollsStr.str());
+    ostringstream rollsStr; rollsStr << u8"ë‚¨ì€ êµ´ë¦¬ê¸°: " << rollsLeft; writeAt(RIGHT_X, RIGHT_Y + 1, rollsStr.str());
 
     int guide_y = RIGHT_Y + 3;
     drawHRule(RIGHT_X, guide_y++);
-    writeAt(RIGHT_X, guide_y++, u8"±ÔÄ¢: ÁÖ»çÀ§´Â ÃÖ´ë 3¹ø±îÁö ±¼¸± ¼ö ÀÖ½À´Ï´Ù.");
-    writeAt(RIGHT_X, guide_y++, u8"ÀÔ·Â: [T] È¦µå, [R] ´Ù½Ã ±¼¸®±â, [S] Á¡¼ö ¼±ÅÃ");
-    writeAt(RIGHT_X, guide_y++, u8"¿¹½Ã: T 1 3 (1¹ø, 3¹ø ÁÖ»çÀ§¸¦ È¦µå/ÇØÁ¦ÇÕ´Ï´Ù)");
+    writeAt(RIGHT_X, guide_y++, u8"ê·œì¹™: ì£¼ì‚¬ìœ„ëŠ” ìµœëŒ€ 3ë²ˆê¹Œì§€ êµ´ë¦´ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+    writeAt(RIGHT_X, guide_y++, u8"ì…ë ¥: [T] í™€ë“œ, [R] ë‹¤ì‹œ êµ´ë¦¬ê¸°, [S] ì ìˆ˜ ì„ íƒ");
+    writeAt(RIGHT_X, guide_y++, u8"ì˜ˆì‹œ: T 1 3 (1ë²ˆ, 3ë²ˆ ì£¼ì‚¬ìœ„ë¥¼ í™€ë“œ/í•´ì œí•©ë‹ˆë‹¤)");
     drawHRule(RIGHT_X, guide_y++);
 
     int dice_start_y = guide_y;
@@ -224,9 +224,9 @@ void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const arra
     writeAt(RIGHT_X, dice_start_y + 6, "   (1)      (2)      (3)      (4)      (5)");
 
     int potential_y = dice_start_y + 9;
-    writeAt(RIGHT_X, potential_y, u8"--- ÇöÀç ÁÖ»çÀ§·Î °¡´ÉÇÑ Á¡¼ö ---");
+    writeAt(RIGHT_X, potential_y, u8"--- í˜„ì¬ ì£¼ì‚¬ìœ„ë¡œ ê°€ëŠ¥í•œ ì ìˆ˜ ---");
     if (isYahtzee(dice) && sc.used[static_cast<int>(Category::YAHTZEE)] && sc.scores[static_cast<int>(Category::YAHTZEE)] > 0)
-        writeAt(RIGHT_X, potential_y, u8"--- ÇöÀç ÁÖ»çÀ§·Î °¡´ÉÇÑ Á¡¼ö (Á¶Ä¿!) ---");
+        writeAt(RIGHT_X, potential_y, u8"--- í˜„ì¬ ì£¼ì‚¬ìœ„ë¡œ ê°€ëŠ¥í•œ ì ìˆ˜ (ì¡°ì»¤!) ---");
 
     int row = potential_y + 1;
     for (int i = 0; i < static_cast<int>(Category::CATEGORY_COUNT); i++) if (!sc.used[i]) {
@@ -239,7 +239,7 @@ void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const arra
         writeAt(RIGHT_X, row++, final_line.str());
     }
 
-    // ¿À¸¥ÂÊ ÀÜ»ó Áö¿ì±â(µ¿Àû)
+    // ì˜¤ë¥¸ìª½ ì”ìƒ ì§€ìš°ê¸°(ë™ì )
     clearRightPaneFrom(row);
 
     int message_y = row;
