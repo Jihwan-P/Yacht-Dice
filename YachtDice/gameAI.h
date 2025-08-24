@@ -9,10 +9,10 @@
 
 using namespace std;
 
-// AI ³­ÀÌµµ ¿­°ÅÇü
+// AI Â³Â­Ã€ÃŒÂµÂµ Â¿Â­Â°Ã…Ã‡Ã¼
 enum class AIDifficulty { EASY, NORMAL, HARD };
 
-// AI Àü·« ÇÔ¼ö
+// AI Ã€Ã¼Â·Â« Ã‡Ã”Â¼Ã¶
 Category chooseBestScoringCategory_Easy(const Dice& d, const array<bool, static_cast<size_t>(Category::CATEGORY_COUNT)>& used);
 pair<Category, int> findBestExpectedCategory_Normal(const Dice& d, const array<bool, static_cast<size_t>(Category::CATEGORY_COUNT)>& used, int rollsLeft);
 array<bool, 5> chooseBestHoldStrategy_Hard(const Dice& d, const array<bool, static_cast<size_t>(Category::CATEGORY_COUNT)>& used, int rollsLeft, int round);
