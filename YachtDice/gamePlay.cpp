@@ -12,20 +12,20 @@ void run_yahtzee_game() {
 #endif
     hideCursor(true);
     clearScreen();
-    writeAt(5, 2, u8"===== ¾ßÃß (ÄÜ¼Ö, ÇÈ¼¿ ¾ÆÆ® ÁÖ»çÀ§) =====");
-    writeAt(5, 4, u8"±ÔÄ¢: 5°³ÀÇ ÁÖ»çÀ§¸¦ ÃÖ´ë 3¹ø±îÁö ±¼¸° µÚ, 13°³ Ä«Å×°í¸®¿¡ °¢ 1È¸¾¿ Á¡¼ö ±â·Ï.");
+    writeAt(5, 2, u8"===== ì•¼ì¶” (ì½˜ì†”, í”½ì…€ ì•„íŠ¸ ì£¼ì‚¬ìœ„) =====");
+    writeAt(5, 4, u8"ê·œì¹™: 5ê°œì˜ ì£¼ì‚¬ìœ„ë¥¼ ìµœëŒ€ 3ë²ˆê¹Œì§€ êµ´ë¦° ë’¤, 13ê°œ ì¹´í…Œê³ ë¦¬ì— ê° 1íšŒì”© ì ìˆ˜ ê¸°ë¡.");
 
     int gameMode = 0;
-    writeAt(5, 7, u8"--- °ÔÀÓ ¸ğµå ¼±ÅÃ ---");
-    writeAt(5, 8, u8"1. ·ÎÄÃ ¸ÖÆ¼ÇÃ·¹ÀÌ (Player vs Player)");
-    writeAt(5, 9, u8"2. AI ´ëÀü (Player vs AI)");
-    writeAt(5, 10, u8"3. AI °üÀü (AI vs AI)");
-    writeAt(5, 11, u8"4. Á¾·á");
-    writeAt(5, 13, u8"¿øÇÏ´Â ¸ğµåÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+    writeAt(5, 7, u8"--- ê²Œì„ ëª¨ë“œ ì„ íƒ ---");
+    writeAt(5, 8, u8"1. ë¡œì»¬ ë©€í‹°í”Œë ˆì´ (Player vs Player)");
+    writeAt(5, 9, u8"2. AI ëŒ€ì „ (Player vs AI)");
+    writeAt(5, 10, u8"3. AI ê´€ì „ (AI vs AI)");
+    writeAt(5, 11, u8"4. ì¢…ë£Œ");
+    writeAt(5, 13, u8"ì›í•˜ëŠ” ëª¨ë“œì˜ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
     while (!(cin >> gameMode) || gameMode < 1 || gameMode > 4) {
         cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         writeAt(5, 14, string(40, ' '));
-        writeAt(5, 14, u8"1~4 »çÀÌÀÇ ¿Ã¹Ù¸¥ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+        writeAt(5, 14, u8"1~4 ì‚¬ì´ì˜ ì˜¬ë°”ë¥¸ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
     }
     cin.ignore((numeric_limits<streamsize>::max)(), '\n');
     if (gameMode == 4) { hideCursor(false); gotoXY(0, 20); return; }
@@ -34,34 +34,34 @@ void run_yahtzee_game() {
     clearScreen();
     switch (gameMode) {
     case 1:
-        writeAt(5, 2, u8"--- ·ÎÄÃ ¸ÖÆ¼ÇÃ·¹ÀÌ ---");
-        writeAt(5, 4, u8"ÇÃ·¹ÀÌ¾î ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä(1-5): ");
+        writeAt(5, 2, u8"--- ë¡œì»¬ ë©€í‹°í”Œë ˆì´ ---");
+        writeAt(5, 4, u8"í”Œë ˆì´ì–´ ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”(1-5): ");
         while (!(cin >> numHumanPlayers) || numHumanPlayers < 1 || numHumanPlayers > 5) {
             cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
             writeAt(5, 5, string(40, ' '));
-            writeAt(5, 5, u8"1~5 »çÀÌÀÇ ¿Ã¹Ù¸¥ ¼ıÀÚ¸¦ ÀÔ·Â: ");
+            writeAt(5, 5, u8"1~5 ì‚¬ì´ì˜ ì˜¬ë°”ë¥¸ ìˆ«ìë¥¼ ì…ë ¥: ");
         }
         cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         numAIPlayers = 0; break;
     case 2:
-        writeAt(5, 2, u8"--- AI ´ëÀü ---");
+        writeAt(5, 2, u8"--- AI ëŒ€ì „ ---");
         numHumanPlayers = 1;
-        writeAt(5, 4, u8"»ó´ëÇÒ AI ÇÃ·¹ÀÌ¾î ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä(1-4): ");
+        writeAt(5, 4, u8"ìƒëŒ€í•  AI í”Œë ˆì´ì–´ ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”(1-4): ");
         while (!(cin >> numAIPlayers) || numAIPlayers < 1 || numAIPlayers > 4) {
             cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
             writeAt(5, 5, string(40, ' '));
-            writeAt(5, 5, u8"1~4 »çÀÌÀÇ ¿Ã¹Ù¸¥ ¼ıÀÚ¸¦ ÀÔ·Â: ");
+            writeAt(5, 5, u8"1~4 ì‚¬ì´ì˜ ì˜¬ë°”ë¥¸ ìˆ«ìë¥¼ ì…ë ¥: ");
         }
         cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         break;
     case 3:
-        writeAt(5, 2, u8"--- AI °üÀü ¸ğµå ---");
+        writeAt(5, 2, u8"--- AI ê´€ì „ ëª¨ë“œ ---");
         numHumanPlayers = 0;
-        writeAt(5, 4, u8"°üÀüÇÒ AI ÇÃ·¹ÀÌ¾î ¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä(2-5): ");
+        writeAt(5, 4, u8"ê´€ì „í•  AI í”Œë ˆì´ì–´ ìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”(2-5): ");
         while (!(cin >> numAIPlayers) || numAIPlayers < 2 || numAIPlayers > 5) {
             cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
             writeAt(5, 5, string(40, ' '));
-            writeAt(5, 5, u8"2~5 »çÀÌÀÇ ¿Ã¹Ù¸¥ ¼ıÀÚ¸¦ ÀÔ·Â: ");
+            writeAt(5, 5, u8"2~5 ì‚¬ì´ì˜ ì˜¬ë°”ë¥¸ ìˆ«ìë¥¼ ì…ë ¥: ");
         }
         cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         break;
@@ -73,24 +73,24 @@ void run_yahtzee_game() {
     int current_y_prompt = 8;
 
     for (int i = 0; i < numHumanPlayers; i++) {
-        string prompt = u8"»ç¶÷ ÇÃ·¹ÀÌ¾î " + to_string(i + 1) + u8" ÀÌ¸§: ";
+        string prompt = u8"ì‚¬ëŒ í”Œë ˆì´ì–´ " + to_string(i + 1) + u8" ì´ë¦„: ";
         writeAt(5, current_y_prompt++, prompt);
         string name; getline(cin, name);
-        if (name.empty()) name = u8"ÇÃ·¹ÀÌ¾î" + to_string(i + 1);
+        if (name.empty()) name = u8"í”Œë ˆì´ì–´" + to_string(i + 1);
         players.emplace_back(name);
         is_computer.push_back(false);
     }
     for (int i = 0; i < numAIPlayers; i++) {
-        string prompt = u8"ÄÄÇ»ÅÍ " + to_string(i + 1) + u8" ³­ÀÌµµ (1:½¬¿ò, 2:º¸Åë, 3:¾î·Á¿ò): ";
+        string prompt = u8"ì»´í“¨í„° " + to_string(i + 1) + u8" ë‚œì´ë„ (1:ì‰¬ì›€, 2:ë³´í†µ, 3:ì–´ë ¤ì›€): ";
         writeAt(5, current_y_prompt, prompt);
         int diff_choice;
         while (!(cin >> diff_choice) || diff_choice < 1 || diff_choice > 3) {
             cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
             writeAt(5, current_y_prompt + 1, string(40, ' '));
-            writeAt(5, current_y_prompt + 1, u8"1, 2, 3 Áß ÇÏ³ª¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
+            writeAt(5, current_y_prompt + 1, u8"1, 2, 3 ì¤‘ í•˜ë‚˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
         }
         cin.ignore((numeric_limits<streamsize>::max)(), '\n');
-        string name = u8"ÄÄÇ»ÅÍ" + to_string(i + 1);
+        string name = u8"ì»´í“¨í„°" + to_string(i + 1);
         players.emplace_back(name);
         is_computer.push_back(true);
         ai_difficulties.push_back(static_cast<AIDifficulty>(diff_choice - 1));
@@ -102,8 +102,8 @@ void run_yahtzee_game() {
 
     for (int round = 1; round <= 13; ++round) {
         for (size_t p = 0; p < players.size(); ++p) {
-            string turn_prompt = players[p].name + u8" ´Ô Â÷·ÊÀÔ´Ï´Ù. Enter Å°¸¦ ´­·¯ ±¼¸®¼¼¿ä...";
-            if (is_computer[p]) turn_prompt = players[p].name + u8" ´ÔÀÇ Â÷·ÊÀÔ´Ï´Ù. Àá½Ã ÈÄ ½ÃÀÛÇÕ´Ï´Ù...";
+            string turn_prompt = players[p].name + u8" ë‹˜ ì°¨ë¡€ì…ë‹ˆë‹¤. Enter í‚¤ë¥¼ ëˆŒëŸ¬ êµ´ë¦¬ì„¸ìš”...";
+            if (is_computer[p]) turn_prompt = players[p].name + u8" ë‹˜ì˜ ì°¨ë¡€ì…ë‹ˆë‹¤. ì ì‹œ í›„ ì‹œì‘í•©ë‹ˆë‹¤...";
             redrawAll(round, (int)p, 3, dice, held, players, turn_prompt);
 
             if (is_computer[p]) this_thread::sleep_for(chrono::seconds(2));
@@ -112,7 +112,7 @@ void run_yahtzee_game() {
             held.fill(false);
             int rolls = 0;
 
-            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù...");
+            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ì£¼ì‚¬ìœ„ë¥¼ êµ´ë¦½ë‹ˆë‹¤...");
             animateRoll(dice, held);
             rolls++;
 
@@ -129,7 +129,7 @@ void run_yahtzee_game() {
 
                     if (difficulty == AIDifficulty::EASY) {
                         if (rolls < 3) {
-                            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù...");
+                            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ì£¼ì‚¬ìœ„ë¥¼ êµ´ë¦½ë‹ˆë‹¤...");
                             animateRoll(dice, held);
                             rolls++;
                             combination = checkForSpecialCombinations(dice);
@@ -147,7 +147,7 @@ void run_yahtzee_game() {
                             turn_over = true;
                         }
                         else {
-                            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù...");
+                            redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", u8"ì£¼ì‚¬ìœ„ë¥¼ êµ´ë¦½ë‹ˆë‹¤...");
                             animateRoll(dice, held);
                             rolls++;
                             combination = checkForSpecialCombinations(dice);
@@ -165,14 +165,14 @@ void run_yahtzee_game() {
 
                     if (command == 'T') {
                         size_t first_digit_pos = line.find_first_of("0123456789");
-                        if (first_digit_pos == string::npos) errorMsg = u8"Àß¸øµÈ ¸í·É¾îÀÔ´Ï´Ù. (¿¹: t 1 2)";
+                        if (first_digit_pos == string::npos) errorMsg = u8"ì˜ëª»ëœ ëª…ë ¹ì–´ì…ë‹ˆë‹¤. (ì˜ˆ: t 1 2)";
                         else {
                             vector<int> indices = parseIndices(line.substr(first_digit_pos));
                             for (int idx : indices) held[idx] = !held[idx];
                         }
                     }
                     else if (command == 'R') {
-                        redrawAll(round, (int)p, 3 - rolls, dice, held, players, human_prompt, "", u8"ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù...");
+                        redrawAll(round, (int)p, 3 - rolls, dice, held, players, human_prompt, "", u8"ì£¼ì‚¬ìœ„ë¥¼ êµ´ë¦½ë‹ˆë‹¤...");
                         animateRoll(dice, held);
                         rolls++;
                         combination = checkForSpecialCombinations(dice);
@@ -182,30 +182,30 @@ void run_yahtzee_game() {
                         turn_over = true;
                     }
                     else {
-                        errorMsg = u8"Àß¸øµÈ ¸í·É¾îÀÔ´Ï´Ù.";
+                        errorMsg = u8"ì˜ëª»ëœ ëª…ë ¹ì–´ì…ë‹ˆë‹¤.";
                     }
                 }
             }
 
             Category chosenCat;
             if (is_computer[p]) {
-                redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", players[p].name + u8" ´ÔÀÌ Á¡¼ö¸¦ ¼±ÅÃÇÕ´Ï´Ù...");
+                redrawAll(round, (int)p, 3 - rolls, dice, held, players, "", "", players[p].name + u8" ë‹˜ì´ ì ìˆ˜ë¥¼ ì„ íƒí•©ë‹ˆë‹¤...");
                 this_thread::sleep_for(chrono::seconds(2));
                 chosenCat = chooseBestScoringCategory(dice, players[p].used, round, ai_difficulties[p - numHumanPlayers]);
             }
             else {
                 bool score_chosen = false; errorMsg = "";
                 while (!score_chosen) {
-                    redrawAll(round, (int)p, 3 - rolls, dice, held, players, u8"±â·ÏÇÒ Ä«Å×°í¸® ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ", errorMsg);
+                    redrawAll(round, (int)p, 3 - rolls, dice, held, players, u8"ê¸°ë¡í•  ì¹´í…Œê³ ë¦¬ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”: ", errorMsg);
                     errorMsg = "";
                     int cat_idx;
                     if (cin >> cat_idx && cat_idx >= 1 && cat_idx <= 13) {
                         chosenCat = static_cast<Category>(cat_idx - 1);
                         if (!players[p].used[cat_idx - 1]) score_chosen = true;
-                        else errorMsg = u8"ÀÌ¹Ì »ç¿ëµÈ Ä«Å×°í¸®ÀÔ´Ï´Ù.";
+                        else errorMsg = u8"ì´ë¯¸ ì‚¬ìš©ëœ ì¹´í…Œê³ ë¦¬ì…ë‹ˆë‹¤.";
                     }
                     else {
-                        errorMsg = u8"1~13 »çÀÌÀÇ ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.";
+                        errorMsg = u8"1~13 ì‚¬ì´ì˜ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.";
                         cin.clear(); cin.ignore((numeric_limits<streamsize>::max)(), '\n');
                     }
                 }
@@ -224,8 +224,8 @@ void run_yahtzee_game() {
                 players[p].yahtzeeBonusCount++;
             }
 
-            string statusMsg2 = CAT_NAME[static_cast<int>(chosenCat)] + u8"¿¡ " + to_string(score) + u8"Á¡À» ±â·ÏÇß½À´Ï´Ù.";
-            redrawAll(round, (int)p, 0, dice, held, players, u8"Enter¸¦ ´­·¯ ´ÙÀ½ ÇÃ·¹ÀÌ¾î·Î...", "", statusMsg2);
+            string statusMsg2 = CAT_NAME[static_cast<int>(chosenCat)] + u8"ì— " + to_string(score) + u8"ì ì„ ê¸°ë¡í–ˆìŠµë‹ˆë‹¤.";
+            redrawAll(round, (int)p, 0, dice, held, players, u8"Enterë¥¼ ëˆŒëŸ¬ ë‹¤ìŒ í”Œë ˆì´ì–´ë¡œ...", "", statusMsg2);
 
             if (is_computer[p]) this_thread::sleep_for(chrono::seconds(2));
             else { string dummy; getline(cin, dummy); }
@@ -233,12 +233,12 @@ void run_yahtzee_game() {
     }
 
     clearScreen();
-    writeAt(5, 2, u8"========== ÃÖÁ¾ °á°ú ==========");
+    writeAt(5, 2, u8"========== ìµœì¢… ê²°ê³¼ ==========");
     sort(players.begin(), players.end(), [](const Scorecard& a, const Scorecard& b) { return a.total() > b.total(); });
     int y = 4;
-    for (const auto& pl : players) writeAt(5, y++, fitName(pl.name, 15) + " : " + to_string(pl.total()) + u8"Á¡");
-    writeAt(5, y + 2, u8"'" + players[0].name + u8"' ´ÔÀÇ ½Â¸®ÀÔ´Ï´Ù!");
-    writeAt(5, y + 4, u8"¾Æ¹« Å°³ª ´­·¯ Á¾·áÇÏ¼¼¿ä...");
+    for (const auto& pl : players) writeAt(5, y++, fitName(pl.name, 15) + " : " + to_string(pl.total()) + u8"ì ");
+    writeAt(5, y + 2, u8"'" + players[0].name + u8"' ë‹˜ì˜ ìŠ¹ë¦¬ì…ë‹ˆë‹¤!");
+    writeAt(5, y + 4, u8"ì•„ë¬´ í‚¤ë‚˜ ëˆŒëŸ¬ ì¢…ë£Œí•˜ì„¸ìš”...");
     cin.get();
 
     hideCursor(false);
