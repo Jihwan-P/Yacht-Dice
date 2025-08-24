@@ -19,14 +19,14 @@
 
 using namespace std;
 
-// =================== »ó¼ö ===================
+// =================== ìƒìˆ˜ ===================
 extern const int LEFT_W;
 extern const int LEFT_X;
 extern const int LEFT_Y;
 extern const int RIGHT_X;
 extern const int RIGHT_Y;
 
-// =================== ÄÜ¼Ö ¹× Àú¼öÁØ ·»´õ¸µ ÇÔ¼ö ===================
+// =================== ì½˜ì†” ë° ì €ìˆ˜ì¤€ ë Œë”ë§ í•¨ìˆ˜ ===================
 #ifdef _WIN32
 extern HANDLE HOUT;
 void hideCursor(bool hide);
@@ -46,16 +46,16 @@ int getConsoleCols();
 int getConsoleRows();
 #endif
 
-// À¯Æ¿¸®Æ¼ ¹× ·»´õ¸µ ÇÔ¼ö
+// ìœ í‹¸ë¦¬í‹° ë° ë Œë”ë§ í•¨ìˆ˜
 int getVisualWidth(const string& s);
 string fitName(const string& s, int maxCells = 10);
-void drawVerticalSep(int col, int y_top, int y_bottom, const string& glyph = u8"¦¢");
+void drawVerticalSep(int col, int y_top, int y_bottom, const string& glyph = u8"â”‚");
 void drawHRule(int x, int y);
 void clearRightPaneFrom(int start_y);
 vector<string> renderDie(int v, bool held);
 int scorePreviewLine(Category i, const Dice& d, const Scorecard& sc);
 
-// ¸ŞÀÎ ·»´õ¸µ ÇÔ¼ö
+// ë©”ì¸ ë Œë”ë§ í•¨ìˆ˜
 void redrawAll(int round, int p_idx, int rollsLeft, const Dice& dice, const array<bool, 5>& held, const vector<Scorecard>& players, const string& promptMsg, const string& errorMsg = "", const string& statusMsg = "");
 void redrawDiceOnly(const Dice& dice, const array<bool, 5>& held, int start_y);
 void displayImpactEffect(const string& combinationName);
