@@ -1,16 +1,16 @@
 #include "gameLogic.h"
 
-// =================== Àü¿ª º¯¼ö Á¤ÀÇ ===================
+// =================== ì „ì—­ ë³€ìˆ˜ ì •ì˜ ===================
 const array<string, static_cast<size_t>(Category::CATEGORY_COUNT)> CAT_NAME = {
-    u8"¿¡ÀÌ½º(1)", u8"ÅõÁî(2)", u8"¾²¸®Áî(3)", u8"Æ÷Áî(4)", u8"ÆÄÀÌºêÁî(5)", u8"½Ä½ºÁî(6)",
-    u8"¾²¸®Ä«ÀÎµå", u8"Æ÷Ä«ÀÎµå", u8"Ç®ÇÏ¿ì½º",
-    u8"½º¸ô ½ºÆ®·¹ÀÌÆ®", u8"¶óÁö ½ºÆ®·¹ÀÌÆ®", u8"¾ßÃß", u8"Âù½º"
+    u8"ì—ì´ìŠ¤(1)", u8"íˆ¬ì¦ˆ(2)", u8"ì“°ë¦¬ì¦ˆ(3)", u8"í¬ì¦ˆ(4)", u8"íŒŒì´ë¸Œì¦ˆ(5)", u8"ì‹ìŠ¤ì¦ˆ(6)",
+    u8"ì“°ë¦¬ì¹´ì¸ë“œ", u8"í¬ì¹´ì¸ë“œ", u8"í’€í•˜ìš°ìŠ¤",
+    u8"ìŠ¤ëª° ìŠ¤íŠ¸ë ˆì´íŠ¸", u8"ë¼ì§€ ìŠ¤íŠ¸ë ˆì´íŠ¸", u8"ì•¼ì¶”", u8"ì°¬ìŠ¤"
 };
 
 mt19937 g_rng(random_device{}());
 uniform_int_distribution<int> g_diceDist(1, 6);
 
-// =================== ±¸Á¶Ã¼ ¸Ş¼­µå ±¸Çö ===================
+// =================== êµ¬ì¡°ì²´ ë©”ì„œë“œ êµ¬í˜„ ===================
 Scorecard::Scorecard(string n) : name(move(n)) {
     scores.fill(0); used.fill(false);
 }
@@ -29,7 +29,7 @@ int Scorecard::upperBonus() const {
 }
 int Scorecard::total() const { return upperSum() + upperBonus() + lowerSum() + (yahtzeeBonusCount * YAHTZEE_BONUS_SCORE); }
 
-// =================== °ÔÀÓ ·ÎÁ÷ ¹× ÇïÆÛ ÇÔ¼ö ===================
+// =================== ê²Œì„ ë¡œì§ ë° í—¬í¼ í•¨ìˆ˜ ===================
 int sumDice(const Dice& d) { return accumulate(d.begin(), d.end(), 0); }
 array<int, 7> countFace(const Dice& d) {
     array<int, 7> c{};
@@ -104,11 +104,11 @@ vector<int> generateDiceSequence(int totalFrames, int maxRepeat) {
     return sequence;
 }
 string checkForSpecialCombinations(const Dice& d) {
-    if (scoreYahtzee(d) > 0) return u8"¾ßÃß!";
-    if (scoreLargeStraight(d) > 0) return u8"¶óÁö ½ºÆ®·¹ÀÌÆ®!";
-    if (scoreSmallStraight(d) > 0) return u8"½º¸ô ½ºÆ®·¹ÀÌÆ®!";
-    if (scoreFullHouse(d) > 0) return u8"Ç®ÇÏ¿ì½º!";
-    if (scoreFourKind(d) > 0) return u8"Æ÷Ä«ÀÎµå!";
-    if (scoreThreeKind(d) > 0) return u8"¾²¸®Ä«ÀÎµå!";
+    if (scoreYahtzee(d) > 0) return u8"ì•¼ì¶”!";
+    if (scoreLargeStraight(d) > 0) return u8"ë¼ì§€ ìŠ¤íŠ¸ë ˆì´íŠ¸!";
+    if (scoreSmallStraight(d) > 0) return u8"ìŠ¤ëª° ìŠ¤íŠ¸ë ˆì´íŠ¸!";
+    if (scoreFullHouse(d) > 0) return u8"í’€í•˜ìš°ìŠ¤!";
+    if (scoreFourKind(d) > 0) return u8"í¬ì¹´ì¸ë“œ!";
+    if (scoreThreeKind(d) > 0) return u8"ì“°ë¦¬ì¹´ì¸ë“œ!";
     return "";
 }
