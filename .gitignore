@@ -1,41 +1,51 @@
-# Prerequisites
-*.d
+# IDE 관련
+# Visual Studio
+.vs/
+*.sln.docstates
+*.suo
+Yacht.vcxproj.user
 
-# Compiled Object files
-*.slo
-*.lo
+# 빌드 관련
+Debug/
+Release/
+x64/
+x86/
+bin/
+obj/
+/ipch/
+/VC.db
+
+# 컴파일된 오브젝트 및 라이브러리
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+*.lo
+*.slo
 *.a
 *.lib
+*.lai
+*.la
+*.dll
+*.so
+*.dylib
 
-# Executables
+# 컴파일된 실행 파일 및 모듈
 *.exe
 *.out
 *.app
+*.mod
+*.smod
 
-# debug information files
+# 컴파일러가 생성하는 기타 파일
+*.d
+*.ilk
+*.gch
+*.pch
+*.pdb
 *.dwo
+*.tlog
+*.idb
+*.iobj
+
+# 게임 데이터베이스 관련
+*.sqlite
+GameDB.db
